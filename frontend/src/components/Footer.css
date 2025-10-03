@@ -1,0 +1,29 @@
+/* Footer container */
+.main-footer {
+  background: #111;
+  color: #ccc;
+  text-align: center;
+  padding: 20px 10px;
+  font-size: 0.95rem;
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+/* Footer text */
+.main-footer p {
+  margin: 0;
+  line-height: 1.5;
+  color: #aaa;
+  transition: color 0.3s ease;
+}
+
+.main-footer p:hover {
+  color: #fff;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .main-footer {
+    font-size: 0.85rem;
+    padding: 15px;
+  }
+}

@@ -1,52 +1,98 @@
-// In frontend/src/pages/ProductsWomen.jsx
+import React, { useEffect, useState } from 'react';
+import Header from '../components/Header';
+import Footer from '../components/Footer';
+import ProductCard from '../components/ProductCard';
+import { fetchProducts } from '../services/api';
+import '../pages/ProductPage.css'; // Import CSS file
 
-import React from 'react';
-import ProductCard from '../components/ProductCard'; 
-import './styles.css'; // Reuse the existing styles
+const ProductWomen = () => {
+  const [products, setProducts] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
+  const [filter, setFilter] = useState('all');
 
-// --- Mock Data for Women's Collection ---
-const womenProducts = [
-  // Paths reference the images in the public/images folder
-  { id: 201, name: "Classic Leather Sneaker", price: 89.99, image: "/images/shoe2.jpg", category: "Casual" },
-  { id: 202, name: "Trail Blazer Boot", price: 155.00, image: "/images/shoe3.jpg", category: "Outdoor" },
-  { id: 203, name: "Lightweight Runner Z", price: 119.99, image: "/images/shoe7.jpg", category: "Running" }, // Requires a new image!
-  { id: 204, name: "Elegant Slip-On", price: 75.00, image: "/images/shoe8.jpg", category: "Casual" }, // Requires a new image!
-];
+  useEffect(() => {
+    const loadProducts = async () => {
+      try {
+        const data = await fetchProducts();
+        setProducts(data.filter(p => p.category.toLowerCase() === 'women'));
+        setLoading(false);
+      } catch (err) {
+        setError('Failed to load products.');
+        setLoading(false);
+      }
+    };
+    loadProducts();
+  }, []);
 
-const Header = () => (
-  <header className="main-header">
-    <h1 className="logo">👟 **SoleStore**</h1>
-    <nav className="nav-links">
-      <a href="/">Home</a>
-      <a href="/men">Men</a>
-      <a href="/women">Women</a>
-      <a href="/sale">Sale</a>
-      <a href="/cart">Cart (0)</a>
-    </nav>
-  </header>
-);
+  const filteredProducts = filter === 'all'
+    ? products
+    : products.filter(p => p.subcategory?.toLowerCase() === filter);
 
-const ProductsWomen = () => {
   return (
     <div className="homepage">
       <Header />
-      <main>
-        <hr/>
-        <section className="product-listing">
-          <h2 className="section-title">✨ **Women's Footwear Collection**</h2>
-          <div className="product-grid">
-            {womenProducts.map(product => (
-              <ProductCard key={product.id} product={product} />
-            ))}
-          </div>
-        </section>
-        <hr/>
-      </main>
-      <footer className="main-footer">
-        <p>&copy; {new Date().getFullYear()} SoleStore. All rights reserved.</p>
-      </footer>
+
+      {/* Hero Banner */}
+      <section className="hero-banner">
+        <div className="hero-content">
+          <h1>Women's Collection</h1>
+          <p>Discover the latest trends in women's fashion with premium quality and timeless designs.</p>
+          <button className="shop-btn">Shop Now</button>
+        </div>
+      </section>
+
+      {/* Filters */}
+      <section className="filters">
+        <button 
+          className={filter === 'all' ? 'active' : ''} 
+          onClick={() => setFilter('all')}
+        >
+          All
+        </button>
+        <button 
+          className={filter === 'dresses' ? 'active' : ''} 
+          onClick={() => setFilter('dresses')}
+        >
+          Dresses
+        </button>
+        <button 
+          className={filter === 'tops' ? 'active' : ''} 
+          onClick={() => setFilter('tops')}
+        >
+          Tops
+        </button>
+        <button 
+          className={filter === 'shoes' ? 'active' : ''} 
+          onClick={() => setFilter('shoes')}
+        >
+          Shoes
+        </button>
+      </section>
+
+      {/* Product Grid */}
+      <section className="product-section">
+        {loading && <p className="loading">Loading...</p>}
+        {error && <p className="error">{error}</p>}
+        <div className="product-grid">
+          {!loading && filteredProducts.map(p => <ProductCard key={p._id} product={p} />)}
+        </div>
+      </section>
+
+      {/* Featured Section */}
+      <section className="featured">
+        <h2>Exclusive Women's Picks</h2>
+        <p>Handpicked styles that redefine fashion and elegance.</p>
+        <div className="featured-cards">
+          <div className="featured-item">✨ Premium Dresses</div>
+          <div className="featured-item">👠 Luxury Shoes</div>
+          <div className="featured-item">👜 Stylish Bags</div>
+        </div>
+      </section>
+
+      <Footer />
     </div>
   );
 };
 
-export default ProductsWomen;
+export default ProductWomen;

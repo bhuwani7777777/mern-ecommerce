@@ -1,88 +1,79 @@
-import React from 'react';
-import ProductCard from './ProductCard'; 
-// Assuming you have components for Header, Footer, and HeroBanner
-// You would import them here:
-// import Header from './Header';
-// import Footer from './Footer';
-import './styles.css';
+import React, { useEffect, useState } from 'react';
+import Header from '../components/Header';
+import Footer from '../components/Footer';
+import ProductCard from '../components/ProductCard';
+import { fetchProducts } from '../services/api';
+import "./HomePage.css";
 
+const HeroSection = () => {
+  const scrollToProducts = () =>
+    document.getElementById('product-grid-section').scrollIntoView({ behavior: 'smooth' });
 
-// --- Mock Data ---
-// In a real application, you would fetch this data from an API.
-const featuredProducts = [
-  { id: 1, name: "Air Zoom Runner", price: 129.99, image: "/images/shoe1.jpg", category: "Running" },
-  { id: 2, name: "Classic Leather Sneaker", price: 89.99, image: "/images/shoe2.jpg", category: "Casual" },
-  { id: 3, name: "Trail Blazer Boot", price: 155.00, image: "/images/shoe3.jpg", category: "Outdoor" },
-  { id: 4, name: "Basket-Pro High-Top", price: 110.50, image: "/images/shoe4.jpg", category: "Basketball" },
-];
-// -----------------
-
-
-const HomePage = () => {
-
-  // --- Mock Components for Structure (Replace with actual imports) ---
-  const Header = () => (
-    <header className="main-header">
-      <h1 className="logo">👟 OG Collection</h1>
-      <nav className="nav-links">
-        <a href="/men">Men</a>
-        <a href="/women">Women</a>
-        <a href="/sale">Sale</a>
-        <a href="/cart">Cart (0)</a>
-      </nav>
-    </header>
-  );
-
-  const HeroBanner = () => (
-    <section className="hero-banner">
-      <div className="hero-content">
-        <h2>Step Into Style. **New Arrivals** **Up to 40% Off!**</h2>
-        <p>Explore the freshest collection of running, casual, and formal footwear.</p>
-        <a href="/shop" className="shop-now-btn">Shop Now **→**</a>
+  return (
+    <section className="hero-section">
+      <div className="hero-overlay">
+        <div className="hero-content">
+          <h1>Shop the Future of E-Commerce</h1>
+          <p>Curated products, trending styles, and unbeatable deals.</p>
+          <button className="hero-btn" onClick={scrollToProducts}>Shop Now</button>
+        </div>
       </div>
-      {/*  */}
     </section>
   );
-  // -------------------------------------------------------------------
+};
 
+const HomePage = () => {
+  const [products, setProducts] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
+
+  useEffect(() => {
+    const loadProducts = async () => {
+      try {
+        const data = await fetchProducts();
+        setProducts(data);
+        setLoading(false);
+      } catch (err) {
+        setError('Failed to load products.');
+        setLoading(false);
+      }
+    };
+    loadProducts();
+  }, []);
 
   return (
     <div className="homepage">
       <Header />
+      <HeroSection />
 
-      <main>
-        <HeroBanner />
+      {/* Featured Categories */}
+      <section className="categories">
+        <h2>Shop by Category</h2>
+        <div className="category-grid">
+          <div className="category-card men">Men's Fashion</div>
+          <div className="category-card women">Women's Fashion</div>
+          <div className="category-card accessories">Accessories</div>
+        </div>
+      </section>
 
-        <hr/>
+      {/* Product Grid */}
+      <section id="product-grid-section" className="product-section">
+        <h2 className="section-title">New Arrivals & Bestsellers</h2>
+        {loading && <p className="loading-text">Loading products...</p>}
+        {error && <p className="error-text">{error}</p>}
+        <div className="product-grid">
+          {!loading && !error && products.map(p => <ProductCard key={p._id} product={p} />)}
+        </div>
+      </section>
 
-        {/* Featured Products Section */}
-        <section className="featured-products">
-          <h2 className="section-title">🔥 **Featured Sneakers**</h2>
-          <div className="product-grid">
-            {featuredProducts.map(product => (
-              // Pass the product data to the reusable ProductCard
-              <ProductCard key={product.id} product={product} />
-            ))}
-          </div>
-        </section>
+      {/* CTA Section */}
+      <section className="homepage-cta">
+        <h2>Subscribe for Exclusive Offers</h2>
+        <p>Get notified about new arrivals, deals, and discounts directly to your inbox.</p>
+        <button className="cta-btn">Subscribe Now</button>
+      </section>
 
-        <hr/>
-
-        {/* **Call to Action Section (e.g., newsletter signup)** */}
-        <section className="cta-section">
-          <h3>Never Miss a Drop</h3>
-          <p>Sign up for our newsletter to get exclusive deals and early access.</p>
-          <form className="newsletter-form">
-            <input type="email" placeholder="Enter your email" required />
-            <button type="submit">Subscribe</button>
-          </form>
-        </section>
-      </main>
-
-      {/* You'd typically include a Footer component here */}
-      <footer className="main-footer">
-        <p>&copy; {new Date().getFullYear()} SoleStore. All rights reserved.</p>
-      </footer>
+      <Footer />
     </div>
   );
 };

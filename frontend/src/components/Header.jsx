@@ -1,47 +1,23 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { useCart } from '../context/CartContext'; // Import cart context
+import "./Header.css";
 
 const Header = () => {
-  const { cartCount } = useCart();
-
   return (
-    <header style={styles.header}>
-      <div style={styles.logo}>
-        <Link to="/" style={styles.link}>
-          MERN Shop
+    <header className="main-header">
+      <div className="logo">
+        <Link to="/">
+          <img src="../images/logo.png" alt="OGcollection Logo" className="logo-img" />
         </Link>
       </div>
-      <nav>
-        <Link to="/cart" style={styles.link}>
-          Cart ({cartCount})
-        </Link>
-        <Link to="/login" style={{ ...styles.link, marginLeft: '15px' }}>
-          Login
-        </Link>
+      <nav className="nav-links">
+        <Link to="/men">Men</Link>
+        <Link to="/women">Women</Link>
+        <Link to="/cart">Cart</Link>
+        <Link to="/login">Login</Link>
       </nav>
     </header>
   );
-};
-
-// Basic inline styles for clarity (you would typically use a separate CSS file)
-const styles = {
-  header: {
-    background: '#333',
-    color: '#fff',
-    padding: '10px 20px',
-    display: 'flex',
-    justifyContent: 'space-between',
-    alignItems: 'center',
-  },
-  logo: {
-    fontSize: '1.5em',
-    fontWeight: 'bold',
-  },
-  link: {
-    color: '#fff',
-    textDecoration: 'none',
-  }
 };
 
 export default Header;

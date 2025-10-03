@@ -1,0 +1,25 @@
+.main-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 15px 50px;
+  background-color: #fff;
+  box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+}
+
+.logo-img {
+  height: 180px; /* Adjust as needed */
+  object-fit: contain;
+}
+
+.nav-links a {
+  margin-left: 25px;
+  text-decoration: none;
+  color: #222;
+  font-weight: 500;
+  transition: color 0.3s;
+}
+
+.nav-links a:hover {
+  color: #1976d2;
+}

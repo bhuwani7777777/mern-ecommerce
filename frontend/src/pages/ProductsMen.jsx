@@ -1,53 +1,109 @@
-// In frontend/src/pages/ProductsMen.jsx
+import React, { useEffect, useState } from 'react';
+import Header from '../components/Header';
+import Footer from '../components/Footer';
+import ProductCard from '../components/ProductCard';
+import { fetchProducts } from '../services/api';
+import '../pages/ProductMen.css'; // Import CSS file
 
-import React from 'react';
-import { Link } from 'react-router-dom';
-import ProductCard from '../components/ProductCard'; 
-import './styles.css'; 
+const ProductMen = () => {
+  const [products, setProducts] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
+  const [filter, setFilter] = useState('all');
 
-// --- Mock Data for Men's Collection ---
-const menProducts = [
-  { id: 101, name: "Air Zoom Runner", price: 129.99, image: "/images/shoe1.jpg", category: "Running" },
-  { id: 102, name: "Basket-Pro High-Top", price: 110.50, image: "/images/shoe4.jpg", category: "Basketball" },
-  { id: 103, name: "Urban Commuter Boot", price: 145.00, image: "/images/shoe5.jpg", category: "Casual" }, 
-  { id: 104, name: "Performance Trainer X", price: 95.00, image: "/images/shoe6.jpg", category: "Training" }, 
-  { id: 105, name: "Classic Leather Sneaker", price: 89.99, image: "/images/shoe2.jpg", category: "Casual" },
-];
+  useEffect(() => {
+    const loadProducts = async () => {
+      try {
+        const data = await fetchProducts();
+        setProducts(data.filter(p => p.category.toLowerCase() === 'men'));
+        setLoading(false);
+      } catch (err) {
+        setError('Failed to load products.');
+        setLoading(false);
+      }
+    };
+    loadProducts();
+  }, []);
 
-const Header = () => (
-  <header className="main-header">
-    <h1 className="logo">👟 **SoleStore**</h1>
-    <nav className="nav-links">
-      <Link to="/">Home</Link>
-      <Link to="/men">Men</Link>
-      <Link to="/women">Women</Link>
-      <Link to="/sale">Sale</Link>
-      <Link to="/cart">Cart (0)</Link>
-    </nav>
-  </header>
-);
+  const filteredProducts =
+    filter === 'all'
+      ? products
+      : products.filter(p => p.subcategory?.toLowerCase() === filter);
 
-const ProductsMen = () => {
   return (
     <div className="homepage">
       <Header />
-      <main>
-        <hr/>
-        <section className="product-listing">
-          <h2 className="section-title">👟 **Men's Footwear Collection**</h2>
-          <div className="product-grid">
-            {menProducts.map(product => (
-              <ProductCard key={product.id} product={product} />
+
+      {/* Hero Banner */}
+      <section className="hero-banner men-banner">
+        <div className="hero-content">
+          <h1>Men’s Collection</h1>
+          <p>Upgrade your wardrobe with classic, stylish, and modern men’s fashion essentials.</p>
+          <button className="shop-btn">Explore Now</button>
+        </div>
+      </section>
+
+      {/* Filters */}
+      <section className="filters">
+        <button
+          className={filter === 'all' ? 'active' : ''}
+          onClick={() => setFilter('all')}
+        >
+          All
+        </button>
+        <button
+          className={filter === 'shirts' ? 'active' : ''}
+          onClick={() => setFilter('shirts')}
+        >
+          Shirts
+        </button>
+        <button
+          className={filter === 'pants' ? 'active' : ''}
+          onClick={() => setFilter('pants')}
+        >
+          Pants
+        </button>
+        <button
+          className={filter === 'shoes' ? 'active' : ''}
+          onClick={() => setFilter('shoes')}
+        >
+          Shoes
+        </button>
+      </section>
+
+      {/* Product Grid */}
+      <section className="product-section">
+        {loading && <p className="loading">Loading...</p>}
+        {error && <p className="error">{error}</p>}
+        <div className="product-grid">
+          {!loading &&
+            filteredProducts.map((p) => (
+              <ProductCard key={p._id} product={p} />
             ))}
-          </div>
-        </section>
-        <hr/>
-      </main>
-      <footer className="main-footer">
-        <p>&copy; {new Date().getFullYear()} SoleStore. All rights reserved.</p>
-      </footer>
+        </div>
+      </section>
+
+      {/* Featured Section */}
+      <section className="featured">
+        <h2>Top Men’s Picks</h2>
+        <p>Curated styles to match every mood and occasion.</p>
+        <div className="featured-cards">
+          <div className="featured-item">👔 Premium Formal Wear</div>
+          <div className="featured-item">👖 Casual Comfort</div>
+          <div className="featured-item">👟 Sneakers & Shoes</div>
+        </div>
+      </section>
+
+      {/* Call-to-Action Section */}
+      <section className="cta">
+        <h2>Join Our Men’s Fashion Club</h2>
+        <p>Be the first to know about new arrivals, discounts, and exclusive deals.</p>
+        <button className="cta-btn">Subscribe Now</button>
+      </section>
+
+      <Footer />
     </div>
   );
 };
 
-export default ProductsMen;
+export default ProductMen;
