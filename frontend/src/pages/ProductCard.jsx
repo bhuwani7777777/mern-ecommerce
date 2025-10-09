@@ -1,21 +1,28 @@
-// In frontend/src/components/ProductCard.js
-
-import React from 'react';
+import React, { useState } from "react";
+import { useCart } from "../context/CartContext";
+import "./ProductCard.css";
 
 const ProductCard = ({ product }) => {
+  const { addToCart } = useCart();
+  const [showNotification, setShowNotification] = useState(false);
+
+  const handleAddToCart = () => {
+    addToCart({ ...product, qty: 1 });
+    setShowNotification(true);
+    setTimeout(() => setShowNotification(false), 2000); // hide after 2s
+  };
+
   return (
     <div className="product-card">
-      {/* The 'product.image' is now the resolved URL from the import in HomePage.jsx */}
-      <img 
-        src={product.image} 
-        alt={product.name} 
-        className="product-image" 
-      />
-      
-      <h3 className="product-name">{product.name}</h3>
-      <p className="product-category">{product.category}</p>
-      <div className="product-price">${product.price.toFixed(2)}</div>
-      <button className="add-to-cart-btn">Add to Cart</button>
+      <img src={product.image} alt={product.name} className="product-img" />
+      <div className="product-details">
+        <h4>{product.name}</h4>
+        <p className="product-price">${product.price.toFixed(2)}</p>
+        <button className="add-cart-btn" onClick={handleAddToCart}>
+          Add to Cart
+        </button>
+        {showNotification && <div className="notification">Added to cart!</div>}
+      </div>
     </div>
   );
 };

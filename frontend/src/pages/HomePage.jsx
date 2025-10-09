@@ -22,6 +22,53 @@ const HeroSection = () => {
   );
 };
 
+// 🔹 Image Slider Component (Shoes)
+const ImageSlider = () => {
+  const images = [
+    "/images/shoe1.jpg",
+    "/images/shoe2.jpg",
+    "/images/shoe3.jpg",
+    "/images/shoe4.jpg",
+    "/images/shoe5.jpg"
+  ];
+
+  const [index, setIndex] = useState(0);
+
+  const nextSlide = () => setIndex((prev) => (prev + 1) % images.length);
+  const prevSlide = () => setIndex((prev) => (prev - 1 + images.length) % images.length);
+
+  useEffect(() => {
+    const autoSlide = setInterval(nextSlide, 4000); // auto slide every 4 sec
+    return () => clearInterval(autoSlide);
+  }, []);
+
+  return (
+    <div className="slider">
+      <div
+        className="slides"
+        style={{ transform: `translateX(${-index * 100}%)` }}
+      >
+        {images.map((src, i) => (
+          <img key={i} src={src} alt={`shoe-${i}`} />
+        ))}
+      </div>
+      <div className="nav left" onClick={prevSlide}>&#10094;</div>
+      <div className="nav right" onClick={nextSlide}>&#10095;</div>
+
+      {/* Dots navigation */}
+      <div className="dots">
+        {images.map((_, i) => (
+          <span
+            key={i}
+            className={`dot ${index === i ? "active" : ""}`}
+            onClick={() => setIndex(i)}
+          ></span>
+        ))}
+      </div>
+    </div>
+  );
+};
+
 const HomePage = () => {
   const [products, setProducts] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -56,9 +103,13 @@ const HomePage = () => {
         </div>
       </section>
 
-      {/* Product Grid */}
+      {/* 🔹 Product Section with Shoe Slider */}
       <section id="product-grid-section" className="product-section">
         <h2 className="section-title">New Arrivals & Bestsellers</h2>
+
+        {/* Shoe Image Slider */}
+        <ImageSlider />
+
         {loading && <p className="loading-text">Loading products...</p>}
         {error && <p className="error-text">{error}</p>}
         <div className="product-grid">

@@ -1,0 +1,95 @@
+/* Container for the login page */
+.auth-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 90vh;
+  background: linear-gradient(to right, #2193b0, #6dd5ed);
+  font-family: 'Arial', sans-serif;
+  padding: 20px;
+}
+
+/* Login Box */
+.auth-box {
+  width: 100%;
+  max-width: 400px;
+  background: #fff;
+  padding: 40px;
+  border-radius: 15px;
+  box-shadow: 0 8px 25px rgba(0,0,0,0.2);
+  text-align: center;
+}
+
+/* Title */
+.auth-box h2 {
+  font-size: 2rem;
+  color: #333;
+  margin-bottom: 25px;
+}
+
+/* Inputs */
+.auth-box input {
+  width: 100%;
+  padding: 12px;
+  margin: 10px 0;
+  border-radius: 10px;
+  border: 1px solid #ccc;
+  font-size: 1rem;
+  transition: 0.3s;
+}
+
+.auth-box input:focus {
+  border-color: #2193b0;
+  box-shadow: 0 0 5px #2193b0;
+}
+
+/* Button */
+.auth-box button {
+  width: 100%;
+  padding: 12px;
+  margin-top: 15px;
+  border-radius: 25px;
+  border: none;
+  background-color: #2193b0;
+  color: #fff;
+  font-size: 1rem;
+  font-weight: bold;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.auth-box button:hover {
+  background-color: #0b5e8a;
+  transform: scale(1.05);
+}
+
+/* Error Message */
+.auth-box .error {
+  color: red;
+  margin-bottom: 15px;
+  font-weight: 500;
+}
+
+/* Link */
+.auth-box .auth-link {
+  margin-top: 15px;
+  font-size: 0.9rem;
+  color: #555;
+}
+
+.auth-box .auth-link a {
+  color: #0b5e8a;
+  text-decoration: none;
+  font-weight: 500;
+}
+
+.auth-box .auth-link a:hover {
+  text-decoration: underline;
+}
+
+/* Responsive */
+@media (max-width: 480px) {
+  .auth-box {
+    padding: 30px 20px;
+  }
+}

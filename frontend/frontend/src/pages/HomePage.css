@@ -1,0 +1,181 @@
+/* General */
+.homepage {
+  font-family: 'Poppins', sans-serif;
+  background: #fdfdfd;
+  color: #222;
+}
+
+/* Hero Section */
+.hero-section {
+  height: 80vh;
+  background: url('/public/images/shoe1.jpg') center/cover no-repeat;
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.hero-overlay {
+  position: absolute;
+  inset: 0;
+  background: rgba(0,0,0,0.45);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.hero-content {
+  color: #fff;
+  text-align: center;
+  max-width: 700px;
+  padding: 20px;
+  animation: fadeIn 1.5s ease-in-out;
+}
+
+.hero-content h1 {
+  font-size: 3rem;
+  margin-bottom: 15px;
+  letter-spacing: 1px;
+}
+
+.hero-content p {
+  font-size: 1.2rem;
+  margin-bottom: 25px;
+}
+
+.hero-btn {
+  padding: 14px 30px;
+  border: none;
+  border-radius: 25px;
+  background: #ff4081;
+  color: white;
+  font-weight: 600;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.hero-btn:hover {
+  background: #e91e63;
+  transform: scale(1.05);
+}
+
+/* Categories Section */
+.categories {
+  text-align: center;
+  padding: 50px 20px 20px;
+}
+
+.categories h2 {
+  font-size: 2rem;
+  margin-bottom: 30px;
+  color: #1976d2;
+}
+
+.category-grid {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 25px;
+}
+
+.category-card {
+  width: 220px;
+  height: 120px;
+  border-radius: 15px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.2rem;
+  font-weight: 600;
+  color: white;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.category-card.men {
+  background: #1976d2;
+}
+
+.category-card.women {
+  background: #e91e63;
+}
+
+.category-card.accessories {
+  background: #ff9800;
+}
+
+.category-card:hover {
+  transform: translateY(-5px);
+  opacity: 0.9;
+}
+
+/* Product Section */
+.product-section {
+  padding: 50px 5%;
+}
+
+.section-title {
+  font-size: 2rem;
+  margin-bottom: 30px;
+  text-align: center;
+  color: #1976d2;
+}
+
+.product-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 25px;
+}
+
+.loading-text,
+.error-text {
+  text-align: center;
+  font-size: 1.1rem;
+  color: gray;
+}
+
+/* CTA Section */
+.homepage-cta {
+  padding: 60px 20px;
+  text-align: center;
+  background: linear-gradient(135deg, #ff4081, #ff80ab);
+  color: #fff;
+}
+
+.homepage-cta h2 {
+  font-size: 2rem;
+  margin-bottom: 15px;
+}
+
+.homepage-cta p {
+  font-size: 1.1rem;
+  margin-bottom: 25px;
+}
+
+.cta-btn {
+  background: white;
+  color: #ff4081;
+  padding: 14px 30px;
+  border: none;
+  border-radius: 25px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.cta-btn:hover {
+  background: #ffe6f0;
+  transform: scale(1.05);
+}
+
+/* Animations */
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .hero-content h1 { font-size: 2rem; }
+  .category-grid { flex-direction: column; align-items: center; }
+}

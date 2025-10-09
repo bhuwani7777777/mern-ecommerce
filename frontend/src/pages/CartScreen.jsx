@@ -1,8 +1,8 @@
-import React from 'react';
-import Header from '../components/Header';
-import Footer from '../components/Footer';
-import { useCart } from '../context/CartContext';
-import "./CartScreen.css"; // CSS for styling
+import React from "react";
+import Header from "../components/Header";
+import Footer from "../components/Footer";
+import { useCart } from "../context/CartContext";
+import "./CartScreen.css";
 
 const CartScreen = () => {
   const { cartItems, removeFromCart, getTotalPrice, updateQty } = useCart();
@@ -21,7 +21,7 @@ const CartScreen = () => {
             <div className="cart-items">
               {cartItems.map(item => (
                 <div key={item._id} className="cart-item">
-                  <img src={item.image || "/images/default-product.png"} alt={item.name} className="cart-item-img" />
+                  <img src={item.image} alt={item.name} className="cart-item-img" />
                   <div className="cart-item-details">
                     <h4>{item.name}</h4>
                     <p>Price: ${item.price.toFixed(2)}</p>
