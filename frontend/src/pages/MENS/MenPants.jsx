@@ -1,28 +1,20 @@
 import React from "react";
-import Header from '../../components/Header';
-import Footer from '../../components/Footer';
+import Header from "../../components/Header";
+import Footer from "../../components/Footer";
+import { useCart } from "../../context/CartContext";
 import "./CategoryPage.css";
 
+import menpants1 from "../imgs/Men/Pants/pant1.jpg";
+import menpants2 from "../imgs/Men/Pants/pant2.jpg";
+import menpants3 from "../imgs/Men/Pants/pant3.jpeg";
+
 const MenPants = () => {
+  const { addToCart } = useCart();
+
   const pants = [
-    {
-      _id: "p1",
-      name: "Slim Fit Jeans",
-      price: 69.99,
-      image: "https://images.unsplash.com/photo-1586449480478-4d4cbf1b3213?w=400",
-    },
-    {
-      _id: "p2",
-      name: "Casual Chinos",
-      price: 59.99,
-      image: "https://images.unsplash.com/photo-1600181952914-05c4270e2c8b?w=400",
-    },
-    {
-      _id: "p3",
-      name: "Classic Black Trousers",
-      price: 75.99,
-      image: "https://images.unsplash.com/photo-1593032465174-5a4bff2e6a91?w=400",
-    },
+    { id: 1, name: "Slim Fit Jeans", price: 1699, img: menpants1 },
+    { id: 2, name: "Casual Chinos", price: 1599, img: menpants2 },
+    { id: 3, name: "Classic Black Trousers", price: 1799, img: menpants3 },
   ];
 
   return (
@@ -31,12 +23,12 @@ const MenPants = () => {
       <div className="category-page">
         <h2>Men’s Pants</h2>
         <div className="product-grid">
-          {pants.map((item) => (
-            <div className="product-card" key={item._id}>
-              <img src={item.image} alt={item.name} />
-              <h3>{item.name}</h3>
-              <p>${item.price}</p>
-              <button>Add to Cart</button>
+          {pants.map((pant) => (
+            <div className="product-card" key={pant.id}>
+              <img src={pant.img} alt={pant.name} className="product-image" />
+              <h3>{pant.name}</h3>
+              <p>Rs. {pant.price}</p>
+              <button onClick={() => addToCart(pant)}>Add to Cart</button>
             </div>
           ))}
         </div>

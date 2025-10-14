@@ -13,6 +13,7 @@ import AboutUs from "./components/AboutUs";
 import ContactUs from "./components/ContactUs";
 import NewArrivals from "./pages/NewArrivals";
 
+
 // Men Category Pages
 import MenShirts from "./pages/MENS/MenShirts";
 import MenPants from "./pages/MENS/MenPants";
@@ -23,10 +24,11 @@ import WomenTops from "./pages/WOMENS/WomenTops";
 import WomenShoes from "./pages/WOMENS/WomenShoes";
 
 // Admin Pages
-import AdminDashboard from "./admin/AdminDashboard";
-import UserManagement from "./admin/UserManagement";
-import ProductManagement from "./admin/ProductManagement";
-import OrderManagement from "./admin/OrderManagement";
+import AdminDashboard from "./admin/AdminDashboard.jsx";
+import UserManagement from "./admin/UserManagement.jsx";
+import ProductManagement from "./admin/ProductManagement.jsx";
+import OrderManagement from "./admin/OrderManagement.jsx";
+
 
 function App() {
   return (

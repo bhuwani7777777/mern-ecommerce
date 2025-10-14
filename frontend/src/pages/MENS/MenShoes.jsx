@@ -1,28 +1,20 @@
 import React from "react";
-import Header from '../../components/Header';
-import Footer from '../../components/Footer';
+import Header from "../../components/Header";
+import Footer from "../../components/Footer";
+import { useCart } from "../../context/CartContext";
 import "./CategoryPage.css";
 
+import menshoes1 from "../imgs/Men/Shoes/shoe1.jpg";
+import menshoes2 from "../imgs/Men/Shoes/shoe2.jpg";
+import menshoes3 from "../imgs/Men/Shoes/shoe3.jpg";
+
 const MenShoes = () => {
+  const { addToCart } = useCart();
+
   const shoes = [
-    {
-      _id: "sh1",
-      name: "Nike Air Max",
-      price: 120,
-      image: "https://images.unsplash.com/photo-1618354690384-9b4dfbb60ed1?w=400",
-    },
-    {
-      _id: "sh2",
-      name: "Adidas Ultraboost",
-      price: 140,
-      image: "https://images.unsplash.com/photo-1585433060503-719f20fa1f1c?w=400",
-    },
-    {
-      _id: "sh3",
-      name: "Puma RS-X",
-      price: 110,
-      image: "https://images.unsplash.com/photo-1618354689627-827f7c5f4a6f?w=400",
-    },
+    { id: 1, name: "Nike Air Max", price: 120, img: menshoes1 },
+    { id: 2, name: "Adidas Ultraboost", price: 140, img: menshoes2 },
+    { id: 3, name: "Puma RS-X", price: 110, img: menshoes3 },
   ];
 
   return (
@@ -31,12 +23,12 @@ const MenShoes = () => {
       <div className="category-page">
         <h2>Men’s Shoes</h2>
         <div className="product-grid">
-          {shoes.map((item) => (
-            <div className="product-card" key={item._id}>
-              <img src={item.image} alt={item.name} />
-              <h3>{item.name}</h3>
-              <p>${item.price}</p>
-              <button>Add to Cart</button>
+          {shoes.map((shoe) => (
+            <div className="product-card" key={shoe.id}>
+              <img src={shoe.img} alt={shoe.name} className="product-image" />
+              <h3>{shoe.name}</h3>
+              <p>Rs. {shoe.price}</p>
+              <button onClick={() => addToCart(shoe)}>Add to Cart</button>
             </div>
           ))}
         </div>

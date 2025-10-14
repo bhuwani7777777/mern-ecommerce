@@ -4,36 +4,36 @@ import Footer from "../components/Footer";
 import { useCart } from "../context/CartContext";
 import "./NewArrivals.css";
 
-// Sample new arrival products
 const newArrivalProducts = [
   {
     _id: "101",
     name: "Nike Air Zoom",
     price: 160,
     image:
-      "https://images.unsplash.com/photo-1618354695372-6186b4a5f2d4?auto=format&fit=crop&w=400&q=80",
+      "https://images.unsplash.com/photo-1542291026-7eec264c27ff?auto=format&fit=crop&w=1400&q=80", // Nike Air Zoom shoe
   },
   {
     _id: "102",
     name: "Adidas Superstar",
     price: 120,
     image:
-      "https://images.unsplash.com/photo-1585433060503-719f20fa1f1c?auto=format&fit=crop&w=400&q=80",
+      "https://images.unsplash.com/photo-1600185365483-26d7a4cc7519?auto=format&fit=crop&w=500&q=80", // Adidas Superstar shoe
   },
-  {
-    _id: "103",
-    name: "Casual Hoodie",
-    price: 55,
-    image:
-      "https://images.unsplash.com/photo-1618354689627-827f7c5f4a6f?auto=format&fit=crop&w=400&q=80",
-  },
-  {
-    _id: "104",
-    name: "Denim Jacket",
-    price: 90,
-    image:
-      "https://images.unsplash.com/photo-1618354690384-9b4dfbb60ed1?auto=format&fit=crop&w=400&q=80",
-  },
+{
+  _id: "103",
+  name: "Casual Hoodie",
+  price: 55,
+  image:
+    "https://images.unsplash.com/photo-1503342217505-b0a15ec3261c?auto=format&fit=crop&w=500&q=80", // Grey casual hoodie
+},
+{
+  _id: "104",
+  name: "Denim Jacket",
+  price: 90,
+  image:
+    "https://images.unsplash.com/photo-1603252109303-2751441dd157?auto=format&fit=crop&w=500&q=80", // Stylish blue denim jacket
+},
+
 ];
 
 const NewArrivals = () => {

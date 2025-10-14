@@ -1,18 +1,27 @@
-import React, { useState } from "react";
+// src/components/Header.jsx
+import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import "./Header.css";
+import { FaShoppingCart, FaBell } from "react-icons/fa";
 
-const Header = () => {
+const Header = ({ cartItems }) => {
   const [menuOpen, setMenuOpen] = useState(false);
-  const [activeDropdown, setActiveDropdown] = useState(null); // track which dropdown is open
+  const [activeDropdown, setActiveDropdown] = useState(null);
+  const [notification, setNotification] = useState(null);
 
   const toggleDropdown = (menu) => {
-    if (activeDropdown === menu) {
-      setActiveDropdown(null);
-    } else {
-      setActiveDropdown(menu);
-    }
+    if (activeDropdown === menu) setActiveDropdown(null);
+    else setActiveDropdown(menu);
   };
+
+  // Notification for added items
+  useEffect(() => {
+    if (cartItems && cartItems.length > 0) {
+      setNotification(`${cartItems.length} item(s) in your cart`);
+      const timer = setTimeout(() => setNotification(null), 3000);
+      return () => clearTimeout(timer);
+    }
+  }, [cartItems]);
 
   return (
     <header className="main-header">
@@ -22,7 +31,6 @@ const Header = () => {
         </Link>
       </div>
 
-      {/* Desktop / Mobile Menu */}
       <nav className={`nav-links ${menuOpen ? "active" : ""}`}>
         {/* Men Dropdown */}
         <div className="nav-item" onClick={() => toggleDropdown("men")}>
@@ -44,12 +52,26 @@ const Header = () => {
           </ul>
         </div>
 
-        <Link to="/new-arrivals">New Arrivals</Link>
-        <Link to="/cart">Cart</Link>
-        <Link to="/login">Login</Link>
+        <Link to="/new-arrivals" className="nav-link">New Arrivals</Link>
+
+        {/* Cart */}
+        <Link to="/cart" className="cart-icon">
+          <FaShoppingCart />
+          {cartItems && cartItems.length > 0 && (
+            <span className="cart-badge">{cartItems.length}</span>
+          )}
+        </Link>
+
+        {notification && (
+          <div className="cart-notification">
+            <FaBell /> {notification}
+          </div>
+        )}
+
+        <Link to="/login" className="nav-link">Login</Link>
       </nav>
 
-      {/* Hamburger Mobile Toggle */}
+      {/* Hamburger */}
       <div
         className={`menu-toggle ${menuOpen ? "open" : ""}`}
         onClick={() => setMenuOpen(!menuOpen)}

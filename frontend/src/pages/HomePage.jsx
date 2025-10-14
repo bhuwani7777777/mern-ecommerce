@@ -13,7 +13,7 @@ const HeroSection = () => {
     <section className="hero-section">
       <div className="hero-overlay">
         <div className="hero-content">
-          <h1>Shop the Future of E-Commerce</h1>
+          <h2>Shop the Future of E-Commerce in one and only OG Collection</h2>
           <p>Curated products, trending styles, and unbeatable deals.</p>
           <button className="hero-btn" onClick={scrollToProducts}>Shop Now</button>
         </div>
