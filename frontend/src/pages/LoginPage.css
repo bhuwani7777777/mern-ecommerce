@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 .register-page {
   min-height: 100vh;
   background: linear-gradient(135deg, #0f0c29, #302b63, #24243e);
@@ -121,4 +122,80 @@
   .register-card {
     padding: 35px;
   }
+=======
+.login-page {
+  position: relative;
+  min-height: 100vh;
+  background: url('/public/images/logo-bg.jpg') center/cover no-repeat;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.login-overlay {
+  position: absolute;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.5);
+}
+
+.login-container {
+  position: relative;
+  background: rgba(255, 255, 255, 0.316);
+  padding: 40px 30px;
+  border-radius: 15px;
+  width: 350px;
+  text-align: center;
+  z-index: 1;
+}
+
+.login-logo {
+  width: 150px;
+  margin-bottom: 20px;
+}
+
+.login-title {
+  font-size: 28px;
+  font-weight: bold;
+  margin-bottom: 10px;
+}
+
+.login-subtitle {
+  font-size: 16px;
+  margin-bottom: 20px;
+}
+
+.login-form input {
+  width: 100%;
+  padding: 12px 15px;
+  margin: 10px 0;
+  border: 1px solid #cccccc6e;
+  border-radius: 10px;
+  font-size: 14px;
+}
+
+.login-btn {
+  width: 100%;
+  padding: 12px;
+  margin-top: 15px;
+  background: #1a73e8;
+  color: white;
+  font-size: 16px;
+  border: none;
+  border-radius: 10px;
+  cursor: pointer;
+}
+
+.login-btn:hover {
+  background: #155ab6;
+}
+
+.login-error {
+  color: red;
+  margin-bottom: 10px;
+}
+
+.login-register {
+  margin-top: 15px;
+  font-size: 14px;
+>>>>>>> 20808e07e92c273c0a254928993adc25adef9acc
 }

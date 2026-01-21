@@ -7,6 +7,7 @@ import dotenv from "dotenv";
 
 dotenv.config();
 const app = express();
+<<<<<<< HEAD
 
 app.use(cors());
 app.use(express.json());
@@ -14,10 +15,17 @@ app.use(express.json());
 // =====================
 // MySQL Connection
 // =====================
+=======
+app.use(cors());
+app.use(express.json());
+
+// MySQL connection
+>>>>>>> 20808e07e92c273c0a254928993adc25adef9acc
 const db = mysql.createConnection({
   host: "localhost",
   user: "root",
   password: "",
+<<<<<<< HEAD
   database: "ecommerce",
 });
 
@@ -31,6 +39,25 @@ const JWT_SECRET = process.env.JWT_SECRET || "secretkey";
 // =====================
 // REGISTER USER
 // =====================
+=======
+  database: "ecommerce", // Make sure this DB exists
+});
+
+db.connect((err) => {
+  if (err) {
+    console.error("MySQL connection error:", err);
+  } else {
+    console.log("Connected to MySQL database!");
+  }
+});
+
+// Secret key for JWT
+const JWT_SECRET = process.env.JWT_SECRET || "secretkey";
+
+// ====================
+// REGISTER USER
+// ====================
+>>>>>>> 20808e07e92c273c0a254928993adc25adef9acc
 app.post("/api/register", async (req, res) => {
   const { name, email, password, role } = req.body;
 
@@ -39,6 +66,7 @@ app.post("/api/register", async (req, res) => {
   }
 
   try {
+<<<<<<< HEAD
     // Check if email already exists
     db.query("SELECT id FROM users WHERE email = ?", [email], async (err, results) => {
       if (err) return res.status(500).json({ message: err.message });
@@ -50,15 +78,28 @@ app.post("/api/register", async (req, res) => {
         if (err) return res.status(500).json({ message: err.message });
         res.status(201).json({ message: "User registered successfully." });
       });
+=======
+    const hashedPassword = await bcrypt.hash(password, 10);
+    const sql = "INSERT INTO users (name, email, password, role) VALUES (?, ?, ?, ?)";
+    db.query(sql, [name, email, hashedPassword, role || "user"], (err, result) => {
+      if (err) return res.status(500).json({ message: err.message });
+      res.status(201).json({ message: "User registered successfully" });
+>>>>>>> 20808e07e92c273c0a254928993adc25adef9acc
     });
   } catch (err) {
     res.status(500).json({ message: err.message });
   }
 });
 
+<<<<<<< HEAD
 // =====================
 // LOGIN USER
 // =====================
+=======
+// ====================
+// LOGIN USER
+// ====================
+>>>>>>> 20808e07e92c273c0a254928993adc25adef9acc
 app.post("/api/login", (req, res) => {
   const { email, password } = req.body;
 
@@ -71,6 +112,7 @@ app.post("/api/login", (req, res) => {
 
     const user = results[0];
     const isMatch = await bcrypt.compare(password, user.password);
+<<<<<<< HEAD
     if (!isMatch) return res.status(400).json({ message: "Invalid password." });
 
     const token = jwt.sign(
@@ -79,6 +121,12 @@ app.post("/api/login", (req, res) => {
       { expiresIn: "1h" }
     );
 
+=======
+
+    if (!isMatch) return res.status(400).json({ message: "Invalid password." });
+
+    const token = jwt.sign({ id: user.id, role: user.role }, JWT_SECRET, { expiresIn: "1h" });
+>>>>>>> 20808e07e92c273c0a254928993adc25adef9acc
     res.json({
       id: user.id,
       name: user.name,
@@ -89,17 +137,26 @@ app.post("/api/login", (req, res) => {
   });
 });
 
+<<<<<<< HEAD
 // =====================
 // GET ALL USERS
 // =====================
 app.get("/api/users", (req, res) => {
   const sql = "SELECT id, name, email, role, created_at, updated_at FROM users";
+=======
+// ====================
+// GET ALL USERS
+// ====================
+app.get("/api/users", (req, res) => {
+  const sql = "SELECT id, name, email, role FROM users";
+>>>>>>> 20808e07e92c273c0a254928993adc25adef9acc
   db.query(sql, (err, results) => {
     if (err) return res.status(500).json({ message: err.message });
     res.json(results);
   });
 });
 
+<<<<<<< HEAD
 // =====================
 // DELETE USER
 // =====================
@@ -128,6 +185,36 @@ app.put("/api/users/:id", (req, res) => {
 // =====================
 // START SERVER
 // =====================
+=======
+// ====================
+// DELETE USER
+// ====================
+app.delete("/api/users/:id", (req, res) => {
+  const { id } = req.params;
+  const sql = "DELETE FROM users WHERE id = ?";
+  db.query(sql, [id], (err, results) => {
+    if (err) return res.status(500).json({ message: err.message });
+    res.json({ message: "User deleted successfully" });
+  });
+});
+
+// ====================
+// UPDATE USER
+// ====================
+app.put("/api/users/:id", (req, res) => {
+  const { id } = req.params;
+  const { name, email, role } = req.body;
+  const sql = "UPDATE users SET name = ?, email = ?, role = ? WHERE id = ?";
+  db.query(sql, [name, email, role, id], (err, results) => {
+    if (err) return res.status(500).json({ message: err.message });
+    res.json({ message: "User updated successfully" });
+  });
+});
+
+// ====================
+// START SERVER
+// ====================
+>>>>>>> 20808e07e92c273c0a254928993adc25adef9acc
 const PORT = process.env.PORT || 5000;
 app.listen(PORT, () => {
   console.log(`Server running on http://localhost:${PORT}`);
