@@ -1,0 +1,140 @@
+.cart-page {
+  font-family: 'Poppins', sans-serif;
+  background: #f9f9f9;
+  color: #222;
+}
+
+.cart-section {
+  padding: 60px 5%;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.cart-section h2 {
+  text-align: center;
+  font-size: 2.5rem;
+  color: #1976d2;
+  margin-bottom: 30px;
+}
+
+.empty-cart {
+  text-align: center;
+  font-size: 1.2rem;
+  color: gray;
+}
+
+.cart-container {
+  display: flex;
+  gap: 30px;
+  flex-wrap: wrap;
+  justify-content: space-between;
+}
+
+.cart-items {
+  flex: 2;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.cart-item {
+  display: flex;
+  background: white;
+  border-radius: 10px;
+  padding: 15px;
+  gap: 20px;
+  box-shadow: 0px 3px 6px rgba(0, 0, 0, 0.1);
+  align-items: center;
+}
+
+.cart-item-img {
+  width: 120px;
+  height: 120px;
+  object-fit: cover;
+  border-radius: 10px;
+}
+
+.cart-item-details h4 {
+  margin: 0 0 8px 0;
+}
+
+.cart-item-details p {
+  margin: 5px 0;
+}
+
+.cart-qty {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.cart-qty input {
+  width: 60px;
+  padding: 5px;
+  border-radius: 5px;
+  border: 1px solid #ccc;
+}
+
+.remove-btn {
+  margin-top: 10px;
+  background: #e91e63;
+  color: white;
+  border: none;
+  padding: 8px 14px;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.remove-btn:hover {
+  background: #ff4081;
+}
+
+.cart-summary {
+  flex: 1;
+  background: #1976d2;
+  color: white;
+  padding: 20px;
+  border-radius: 10px;
+  min-width: 250px;
+  height: fit-content;
+}
+
+.cart-summary h3 {
+  margin-bottom: 20px;
+}
+
+.cart-summary p {
+  margin-bottom: 15px;
+  font-size: 1.1rem;
+}
+
+.checkout-btn {
+  background: #ff4081;
+  color: white;
+  border: none;
+  padding: 12px 20px;
+  font-size: 1rem;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.checkout-btn:hover {
+  background: #e91e63;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .cart-container {
+    flex-direction: column;
+  }
+  .cart-item {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+  .cart-item-img {
+    width: 100%;
+    height: auto;
+  }
+}

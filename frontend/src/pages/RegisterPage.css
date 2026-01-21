@@ -1,0 +1,124 @@
+.register-page {
+  min-height: 100vh;
+  background: linear-gradient(135deg, #0f0c29, #302b63, #24243e);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-family: "Poppins", sans-serif;
+}
+
+/* Card */
+.register-card {
+  width: 100%;
+  max-width: 460px;
+  background: rgba(255, 255, 255, 0.12);
+  backdrop-filter: blur(20px);
+  border-radius: 20px;
+  padding: 50px;
+  box-shadow: 0 30px 70px rgba(0, 0, 0, 0.7);
+  text-align: center;
+  border: 1px solid rgba(255, 255, 255, 0.15);
+}
+
+.register-logo {
+  width: 100px;
+  margin-bottom: 20px;
+}
+
+.register-title {
+  color: #fff;
+  font-size: 30px;
+  font-weight: 700;
+}
+
+.register-subtitle {
+  color: #ccc;
+  margin-bottom: 30px;
+}
+
+.register-error {
+  color: #ff6b6b;
+  margin-bottom: 15px;
+}
+
+/* Inputs */
+.register-form input {
+  width: 100%;
+  padding: 14px;
+  margin-bottom: 16px;
+  border-radius: 12px;
+  border: 1px solid rgba(255, 255, 255, 0.4);
+  background: transparent;
+  color: #fff;
+  font-size: 14px;
+  outline: none;
+  transition: 0.3s;
+}
+
+.register-form input::placeholder {
+  color: #aaa;
+}
+
+.register-form input:focus {
+  border-color: #ff9800;
+  box-shadow: 0 0 15px rgba(255, 152, 0, 0.5);
+}
+
+/* Password strength */
+.password-strength {
+  font-size: 13px;
+  margin-bottom: 18px;
+  text-align: left;
+}
+
+.password-strength.weak {
+  color: #ff6b6b;
+}
+
+.password-strength.strong {
+  color: #4caf50;
+}
+
+/* Button */
+.register-form button {
+  width: 100%;
+  padding: 15px;
+  border-radius: 14px;
+  border: none;
+  background: linear-gradient(135deg, #ff9800, #ff5722);
+  color: #fff;
+  font-size: 16px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.register-form button:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 12px 25px rgba(255, 152, 0, 0.45);
+}
+
+.register-form button:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+/* Footer */
+.register-login {
+  margin-top: 22px;
+  color: #ddd;
+  font-size: 14px;
+}
+
+.register-login a {
+  color: #ff9800;
+  font-weight: 600;
+  text-decoration: none;
+}
+
+/* Mobile */
+@media (max-width: 480px) {
+  .register-card {
+    padding: 35px;
+  }
+}
