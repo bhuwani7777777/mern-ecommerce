@@ -23,3 +23,10 @@ A full-stack MERN (MongoDB, Express, React, Node.js) E-commerce application.
 2. Install dependencies: `npm install`
 3. Start frontend: `npm start`
 4. Start backend: `npm run server` (or `node server.js`)
+
+## Features
+- Product listing
+- Cart system
+- Checkout flow
+- Stripe payment integration (test mode)
+- Admin dashboard
