@@ -27,6 +27,9 @@ import UserManagement from "./admin/UserManagement";
 import ProductManagement from "./admin/ProductManagement";
 import OrderManagement from "./admin/OrderManagement";
 
+import CheckoutPage from "./pages/CheckoutPage";
+
+
 /* ================= APP ================= */
 function App() {
   return (
@@ -61,6 +64,8 @@ function App() {
           <Route path="/admin/users" element={<UserManagement />} />
           <Route path="/admin/products" element={<ProductManagement />} />
           <Route path="/admin/orders" element={<OrderManagement />} />
+          <Route path="/pages/checkout" element={<CheckoutPage />} />
+
 
           {/* ===== 404 ===== */}
           <Route
