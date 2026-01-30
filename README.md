@@ -30,3 +30,8 @@ A full-stack MERN (MongoDB, Express, React, Node.js) E-commerce application.
 - Checkout flow
 - Stripe payment integration (test mode)
 - Admin dashboard
+
+## Recent Updates
+- Added checkout page
+- Integrated Stripe test payment
+- Improved cart-to-checkout flow
