@@ -38,14 +38,6 @@ const ImageSlider = () => {
 
   const [index, setIndex] = useState(0);
 
-  useEffect(() => {
-    const timer = setInterval(
-      () => setIndex((prev) => (prev + 1) % images.length),
-      4000
-    );
-    return () => clearInterval(timer);
-  }, []);
-
   const prevSlide = () =>
     setIndex((prev) => (prev - 1 + images.length) % images.length);
   const nextSlide = () => setIndex((prev) => (prev + 1) % images.length);
